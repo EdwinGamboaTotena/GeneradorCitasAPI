@@ -6,6 +6,5 @@ Este proyecto tiene la finalidad de afianzar conocimientos previos y entender la
 ---
 ## Teconologias:
 
->- Java 11
->- Spring Boot 2.3.4
->- Angular 10.1
+>- Java 8
+>- Spring Boot 2.1.6.RELEASE
