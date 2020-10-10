@@ -20,9 +20,8 @@ public class CitaEntity {
     @Column(nullable = false)
     private Date fehcaSolicitud;
 
-    @OneToOne
-    @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "id")
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "id", nullable = false)
     private ProductoEntity productoSolicitado;
 
     @OneToOne
