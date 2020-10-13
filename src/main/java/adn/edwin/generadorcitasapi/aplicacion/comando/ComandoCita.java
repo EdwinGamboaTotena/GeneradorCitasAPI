@@ -1,7 +1,6 @@
 package adn.edwin.generadorcitasapi.aplicacion.comando;
 
 import adn.edwin.generadorcitasapi.dominio.Cupon;
-import adn.edwin.generadorcitasapi.dominio.Producto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -20,7 +19,7 @@ public class ComandoCita {
     private String cedulaCliente;
 
     public ComandoCita(Long id, Date fechaGeneracion, Date fehcaSolicitud, ComandoProducto productoSolicitado,
-                       Cupon cuponUsado, String cedulaCliente, double precioProducto) {
+                       Cupon cuponUsado, String cedulaCliente) {
         this.id = id;
         this.fechaGeneracion = fechaGeneracion;
         this.fehcaSolicitud = fehcaSolicitud;
@@ -29,12 +28,17 @@ public class ComandoCita {
         this.cedulaCliente = cedulaCliente;
     }
 
+    public Date getFechaGeneracion() {
+        return fechaGeneracion;
+    }
+
+
     public Long getId() {
         return id;
     }
 
-    public Date getFechaGeneracion() {
-        return fechaGeneracion;
+    public Cupon getCuponUsado() {
+        return cuponUsado;
     }
 
     public Date getFehcaSolicitud() {
@@ -43,10 +47,6 @@ public class ComandoCita {
 
     public ComandoProducto getProductoSolicitado() {
         return productoSolicitado;
-    }
-
-    public Cupon getCuponUsado() {
-        return cuponUsado;
     }
 
     public String getCedulaCliente() {

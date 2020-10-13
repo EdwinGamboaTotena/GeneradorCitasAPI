@@ -1,6 +1,8 @@
 package adn.edwin.generadorcitasapi.infraestructura.controllador;
 
 import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoCita;
+import adn.edwin.generadorcitasapi.aplicacion.manejadores.cita.ManejadorListarCitas;
+import adn.edwin.generadorcitasapi.aplicacion.manejadores.cita.ManejadorObtenerCita;
 import adn.edwin.generadorcitasapi.dominio.Cita;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,15 @@ import java.util.List;
 @RequestMapping("/cita")
 public class ControladorCita {
 
+    private final ManejadorObtenerCita manejadorObtenerCita;
+
+    private final ManejadorListarCitas manejadorListarCitas;
+
+    public ControladorCita(ManejadorObtenerCita manejadorObtenerCita, ManejadorListarCitas manejadorListarCitas) {
+        this.manejadorObtenerCita = manejadorObtenerCita;
+        this.manejadorListarCitas = manejadorListarCitas;
+    }
+
     @PostMapping
     public void agregar(@RequestBody ComandoCita comandoCita) {
         //TODO agregar las llamadas a los manejadores
@@ -17,13 +28,11 @@ public class ControladorCita {
 
     @GetMapping("/{id}")
     public Cita buscar(@PathVariable Long id) {
-        //TODO agregar logica para traer una cita por el ID
-        return null;
+        return this.manejadorObtenerCita.ejecutar(id);
     }
 
     @GetMapping
     public List<Cita> listar() {
-        //TODO agregar logica para traer todas las citas registradas
-        return null;
+        return this.manejadorListarCitas.ejecutar();
     }
 }

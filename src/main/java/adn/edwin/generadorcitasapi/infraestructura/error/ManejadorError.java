@@ -1,6 +1,7 @@
 package adn.edwin.generadorcitasapi.infraestructura.error;
 
 import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
+import adn.edwin.generadorcitasapi.dominio.exception.CuponException;
 import adn.edwin.generadorcitasapi.dominio.exception.ProductoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
     public ManejadorError() {
         CODIGOS_ESTADO.put(ProductoException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         CODIGOS_ESTADO.put(CitaException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
-
+        CODIGOS_ESTADO.put(CuponException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
     }
 
     @ExceptionHandler(Exception.class)

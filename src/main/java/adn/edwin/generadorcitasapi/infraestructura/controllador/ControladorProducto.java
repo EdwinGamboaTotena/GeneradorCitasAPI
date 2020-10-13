@@ -1,6 +1,8 @@
 package adn.edwin.generadorcitasapi.infraestructura.controllador;
 
 import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoProducto;
+import adn.edwin.generadorcitasapi.aplicacion.manejadores.producto.ManejadorListarProductos;
+import adn.edwin.generadorcitasapi.aplicacion.manejadores.producto.ManejadorObtenerProducto;
 import adn.edwin.generadorcitasapi.dominio.Producto;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,15 @@ import java.util.List;
 @RequestMapping("/producto")
 public class ControladorProducto {
 
+    private final ManejadorObtenerProducto manejadorObtenerProducto;
+    private final ManejadorListarProductos manejadorListarProductos;
+
+    public ControladorProducto(ManejadorObtenerProducto manejadorObtenerProducto,
+                               ManejadorListarProductos manejadorListarProductos) {
+        this.manejadorObtenerProducto = manejadorObtenerProducto;
+        this.manejadorListarProductos = manejadorListarProductos;
+    }
+
     @PostMapping
     public void agregar(@RequestBody ComandoProducto comandoProducto) {
         //TODO agregar las llamadas a los manejadores
@@ -17,13 +28,11 @@ public class ControladorProducto {
 
     @GetMapping("/{id}")
     public Producto buscar(@PathVariable Long id) {
-        //TODO agregar logica para traer un producto por el ID
-        return null;
+        return this.manejadorObtenerProducto.ejecutar(id);
     }
 
     @GetMapping
     public List<Producto> listar() {
-        //TODO agregar logica para traer todos los productos registrados
-        return null;
+        return this.manejadorListarProductos.ejecutar();
     }
 }

@@ -16,20 +16,20 @@ public class ComandoProducto {
         this.porcetajeCuponGenerar = porcetajeCuponGenerar;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
     public double getPrecio() {
         return precio;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public boolean isGeneraCupo() {
         return generaCupo;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public double getPorcetajeCuponGenerar() {

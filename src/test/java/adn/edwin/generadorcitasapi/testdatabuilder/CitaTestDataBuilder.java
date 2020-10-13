@@ -90,7 +90,7 @@ public class CitaTestDataBuilder {
 
     public ComandoCita buildComando() {
         return new ComandoCita(null, fechaGeneracion, fehcaSolicitud, comandoProducto, cuponUsado,
-                cedulaCliente, precioProducto);
+                cedulaCliente);
     }
 
 }
