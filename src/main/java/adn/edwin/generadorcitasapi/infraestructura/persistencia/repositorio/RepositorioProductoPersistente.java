@@ -8,6 +8,7 @@ import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +50,11 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
     public ProductoEntity obtenerProductoEntityPorId(Long id) {
         Query query = entityManager.createNamedQuery(PRODUCTO_FIND_BY_ID);
         query.setParameter(ID, id);
-
-        return (ProductoEntity) query.getSingleResult();
+        try {
+            return (ProductoEntity) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override

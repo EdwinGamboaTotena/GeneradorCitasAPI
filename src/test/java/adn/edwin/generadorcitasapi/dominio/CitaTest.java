@@ -24,7 +24,6 @@ public class CitaTest {
     private static final double PRECIO_PRODUCTO = PRODUCTO.getPrecio();
 
     private static final String CEDULA_VACIA = "";
-    private static final String FECHA_SOLICITUD_ANTERIOR = "2020-09-09";
 
     @Test
     public void crearCitaSinCupon() {
@@ -80,17 +79,4 @@ public class CitaTest {
         }
     }
 
-    @Test
-    public void citaFechaSolicitudAnterior() {
-        //arange
-        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder()
-                .conFechaSolicitud(FECHA_SOLICITUD_ANTERIOR);
-        //act
-        try {
-            Cita cita = citaTestDataBuilder.build();
-            fail();
-        } catch (CitaException citaException) {
-            assertEquals(Cita.FEHCA_SOLICITADA_ANTERIOR_FECHA_GENERADA, citaException.getMessage());
-        }
-    }
 }

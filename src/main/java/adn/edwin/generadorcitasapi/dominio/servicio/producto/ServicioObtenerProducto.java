@@ -3,10 +3,7 @@ package adn.edwin.generadorcitasapi.dominio.servicio.producto;
 import adn.edwin.generadorcitasapi.dominio.Producto;
 import adn.edwin.generadorcitasapi.dominio.exception.ProductoException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioProducto;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ServicioObtenerProducto {
 
     public static final String PRODUCTO_NO_ENCONTRADO = "Este producto no se encuentra registrado.";
@@ -18,10 +15,11 @@ public class ServicioObtenerProducto {
     }
 
     public Producto ejecutar(Long id) {
-        try {
-            return this.repositorioProducto.obtener(id);
-        } catch (EmptyResultDataAccessException erd) {
+        Producto producto = this.repositorioProducto.obtener(id);
+
+        if (producto == null)
             throw new ProductoException(PRODUCTO_NO_ENCONTRADO);
-        }
+
+        return producto;
     }
 }

@@ -7,8 +7,6 @@ import java.util.Date;
 public class Cita {
 
     public static final String CEDULA_OBLIGATORIA = "La cedula del cliente es obligatoria.";
-    public static final String FEHCA_SOLICITADA_ANTERIOR_FECHA_GENERADA =
-            "La fecha de solicitud no puede ser anteior a la fecha en que se realizo la solicitud.";
 
     private Long id;
     private Date fechaGeneracion;
@@ -21,7 +19,6 @@ public class Cita {
     public Cita(Long id, Date fechaGeneracion, Date fehcaSolicitud, Producto productoSolicitado,
                 Cupon cuponUsado, String cedulaCliente, double precioProducto) {
         validarCedula(cedulaCliente);
-        validarFechaSolicitud(fehcaSolicitud, fechaGeneracion);
         this.id = id;
         this.fechaGeneracion = fechaGeneracion;
         this.fehcaSolicitud = fehcaSolicitud;
@@ -34,12 +31,6 @@ public class Cita {
     private void validarCedula(String cedula) {
         if (cedula == null || cedula.trim().length() == 0) {
             throw new CitaException(CEDULA_OBLIGATORIA);
-        }
-    }
-
-    private void validarFechaSolicitud(Date fehcaSolicitud, Date fechaGeneracion) {
-        if (fehcaSolicitud.before(fechaGeneracion) || fehcaSolicitud.equals(fechaGeneracion)) {
-            throw new CitaException(FEHCA_SOLICITADA_ANTERIOR_FECHA_GENERADA);
         }
     }
 

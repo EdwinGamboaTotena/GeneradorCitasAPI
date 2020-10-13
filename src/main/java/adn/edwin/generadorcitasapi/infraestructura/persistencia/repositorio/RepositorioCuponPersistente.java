@@ -8,6 +8,7 @@ import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 @Repository
@@ -37,7 +38,11 @@ public class RepositorioCuponPersistente implements RepositorioCupon, Repositori
     public CuponEntity obtenerCuponEntityPorId(Long id) {
         Query query = entityManager.createNamedQuery(CUPON_FIND_BY_ID);
         query.setParameter(ID, id);
-
-        return (CuponEntity) query.getSingleResult();
+        try {
+            return (CuponEntity) query.getSingleResult();
+        } catch (
+                NoResultException nre) {
+            return null;
+        }
     }
 }

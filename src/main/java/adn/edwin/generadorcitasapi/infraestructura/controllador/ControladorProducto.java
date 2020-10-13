@@ -1,6 +1,7 @@
 package adn.edwin.generadorcitasapi.infraestructura.controllador;
 
 import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoProducto;
+import adn.edwin.generadorcitasapi.aplicacion.manejadores.producto.ManejadorAgregarProducto;
 import adn.edwin.generadorcitasapi.aplicacion.manejadores.producto.ManejadorListarProductos;
 import adn.edwin.generadorcitasapi.aplicacion.manejadores.producto.ManejadorObtenerProducto;
 import adn.edwin.generadorcitasapi.dominio.Producto;
@@ -14,16 +15,19 @@ public class ControladorProducto {
 
     private final ManejadorObtenerProducto manejadorObtenerProducto;
     private final ManejadorListarProductos manejadorListarProductos;
+    private final ManejadorAgregarProducto manejadorAgregarProducto;
 
     public ControladorProducto(ManejadorObtenerProducto manejadorObtenerProducto,
-                               ManejadorListarProductos manejadorListarProductos) {
+                               ManejadorListarProductos manejadorListarProductos,
+                               ManejadorAgregarProducto manejadorAgregarProducto) {
         this.manejadorObtenerProducto = manejadorObtenerProducto;
         this.manejadorListarProductos = manejadorListarProductos;
+        this.manejadorAgregarProducto = manejadorAgregarProducto;
     }
 
     @PostMapping
     public void agregar(@RequestBody ComandoProducto comandoProducto) {
-        //TODO agregar las llamadas a los manejadores
+        this.manejadorAgregarProducto.ejecutar(comandoProducto);
     }
 
     @GetMapping("/{id}")

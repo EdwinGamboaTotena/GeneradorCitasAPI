@@ -3,10 +3,7 @@ package adn.edwin.generadorcitasapi.dominio.servicio.cita;
 import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ServicioObtenerCita {
 
     public static final String CITA_NO_ENCONTRADA = "Esta cita no se encuentra registrada.";
@@ -18,10 +15,11 @@ public class ServicioObtenerCita {
     }
 
     public Cita ejecutar(Long id) {
-        try {
-            return this.repositorioCita.obtener(id);
-        } catch (EmptyResultDataAccessException erd) {
+        Cita cita = this.repositorioCita.obtener(id);
+
+        if (cita == null)
             throw new CitaException(CITA_NO_ENCONTRADA);
-        }
+
+        return cita;
     }
 }
