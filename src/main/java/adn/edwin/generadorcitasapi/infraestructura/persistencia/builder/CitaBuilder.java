@@ -5,6 +5,13 @@ import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CitaEnti
 
 public final class CitaBuilder {
 
+    private static final String INSTANCIA_CLASE_UTILIDAD =
+            "La clase CitaBuilder no debe ser instanciada, es una clase de utilidad";
+
+    private CitaBuilder() {
+        throw new IllegalStateException(INSTANCIA_CLASE_UTILIDAD);
+    }
+
     public static Cita convertirADominio(CitaEntity citaEntity) {
 
         Cita cita = null;
