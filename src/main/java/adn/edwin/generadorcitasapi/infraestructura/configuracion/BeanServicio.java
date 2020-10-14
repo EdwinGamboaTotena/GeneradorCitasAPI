@@ -7,6 +7,7 @@ import adn.edwin.generadorcitasapi.dominio.servicio.cita.ServicioAgregarCita;
 import adn.edwin.generadorcitasapi.dominio.servicio.cita.ServicioListarCitas;
 import adn.edwin.generadorcitasapi.dominio.servicio.cita.ServicioObtenerCita;
 import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioAgregarCupon;
+import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioEditarCupon;
 import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioObtenerCupon;
 import adn.edwin.generadorcitasapi.dominio.servicio.producto.ServicioAgregarProducto;
 import adn.edwin.generadorcitasapi.dominio.servicio.producto.ServicioListarProductos;
@@ -43,6 +44,11 @@ public class BeanServicio {
     }
 
     @Bean
+    public ServicioEditarCupon servicioEditarCupon(RepositorioCupon repositorioCupon) {
+        return new ServicioEditarCupon(repositorioCupon);
+    }
+
+    @Bean
     public ServicioObtenerCita servicioObtenerCita(RepositorioCita repositorioCita) {
         return new ServicioObtenerCita(repositorioCita);
     }
@@ -54,7 +60,10 @@ public class BeanServicio {
 
     @Bean
     public ServicioAgregarCita servicioAgregarCita(RepositorioCita repositorioCita,
-                                                   ServicioObtenerCupon servicioObtenerCupon) {
-        return new ServicioAgregarCita(repositorioCita, servicioObtenerCupon);
+                                                   ServicioObtenerCupon servicioObtenerCupon,
+                                                   ServicioAgregarCupon servicioAgregarCupon,
+                                                   ServicioEditarCupon servicioEditarCupon) {
+        return new ServicioAgregarCita(repositorioCita, servicioObtenerCupon,
+                servicioAgregarCupon, servicioEditarCupon);
     }
 }

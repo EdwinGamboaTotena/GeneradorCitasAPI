@@ -13,26 +13,23 @@ public final class ProductoBuilder {
     }
 
     public static Producto convertirADominio(ProductoEntity productoEntity) {
-
         Producto producto = null;
-
         if (productoEntity != null) {
             producto = new Producto(productoEntity.getId(), productoEntity.getNombre(), productoEntity.getPrecio(),
                     productoEntity.isGeneraCupon(), productoEntity.getPorcentajeCuponGenerar());
         }
-
         return producto;
     }
 
     public static ProductoEntity convertirAEntity(Producto producto) {
-
         ProductoEntity productoEntity = new ProductoEntity();
-        productoEntity.setId(producto.getId());
-        productoEntity.setNombre(producto.getNombre());
-        productoEntity.setPrecio(producto.getPrecio());
-        productoEntity.setGeneraCupon(producto.isGeneraCupo());
-        productoEntity.setPorcentajeCuponGenerar(producto.getPorcetajeCuponGenerar());
-
+        if (producto != null) {
+            productoEntity.setId(producto.getId());
+            productoEntity.setNombre(producto.getNombre());
+            productoEntity.setPrecio(producto.getPrecio());
+            productoEntity.setGeneraCupon(producto.isGeneraCupo());
+            productoEntity.setPorcentajeCuponGenerar(producto.getPorcetajeCuponGenerar());
+        }
         return productoEntity;
     }
 

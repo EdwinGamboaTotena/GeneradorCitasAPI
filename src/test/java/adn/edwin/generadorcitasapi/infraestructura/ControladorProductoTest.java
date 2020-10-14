@@ -1,5 +1,7 @@
 package adn.edwin.generadorcitasapi.infraestructura;
 
+import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoProducto;
+import adn.edwin.generadorcitasapi.testdatabuilder.ProductoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,6 +55,23 @@ public class ControladorProductoTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].precio").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].porcetajeCuponGenerar").value(0))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].generaCupo").value(false));
+    }
+
+    @Test
+    public void agregarProducto() throws Exception
+    {
+        ComandoProducto comandoProducto= new ProductoTestDataBuilder().buildComando();
+        mvc.perform( MockMvcRequestBuilders
+                .post("/producto")
+                .content(objectMapper.writeValueAsString(comandoProducto))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(21))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nombre").value("ProductoTest"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.precio").value(18000))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.porcetajeCuponGenerar").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.generaCupo").value(true));
     }
 
 }

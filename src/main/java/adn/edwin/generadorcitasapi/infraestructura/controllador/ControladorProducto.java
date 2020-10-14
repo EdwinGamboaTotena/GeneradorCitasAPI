@@ -26,8 +26,8 @@ public class ControladorProducto {
     }
 
     @PostMapping
-    public void agregar(@RequestBody ComandoProducto comandoProducto) {
-        this.manejadorAgregarProducto.ejecutar(comandoProducto);
+    public Producto agregar(@RequestBody ComandoProducto comandoProducto) {
+        return this.manejadorAgregarProducto.ejecutar(comandoProducto);
     }
 
     @GetMapping("/{id}")

@@ -4,6 +4,7 @@ import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoCita;
 import adn.edwin.generadorcitasapi.aplicacion.fabrica.FabricaCita;
 import adn.edwin.generadorcitasapi.dominio.servicio.cita.ServicioAgregarCita;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ManejadorAgregarCita {
@@ -17,6 +18,7 @@ public class ManejadorAgregarCita {
         this.fabricaCita = fabricaCita;
     }
 
+    @Transactional
     public void ejecutar(ComandoCita comandoCita) {
         this.servicioAgregarCita.ejecutar(this.fabricaCita.crearCita(comandoCita));
     }

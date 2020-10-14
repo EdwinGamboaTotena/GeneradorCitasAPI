@@ -5,8 +5,8 @@ import adn.edwin.generadorcitasapi.dominio.Producto;
 
 public class ProductoTestDataBuilder {
 
-    private static final String NOMBRE = "Parejas";
-    private static final double PRECIO = 18;
+    private static final String NOMBRE = "ProductoTest";
+    private static final double PRECIO = 18000;
     private static final boolean GENERA_CUPON = true;
     private static final double PORCENTAJE_DESCUENTO_GENERAR = 10;
 

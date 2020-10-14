@@ -3,7 +3,6 @@ package adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad;
 import javax.persistence.*;
 
 @Entity(name = "Cupon")
-@NamedQuery(name = "Cupon.findById", query = "SELECT cupon FROM Cupon cupon WHERE cupon.id = :id")
 public class CuponEntity {
 
     @Id

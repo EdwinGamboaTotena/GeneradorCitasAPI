@@ -14,9 +14,9 @@ public class ServicioAgregarProducto {
         this.repositorioProducto = repositorioProducto;
     }
 
-    public void ejecutar(Producto producto) {
-        if (producto.getId() == null || producto.getId() > 0)
+    public Producto ejecutar(Producto producto) {
+        if (producto.getId() != null && producto.getId() > 0)
             throw new ProductoException(ID_NO_DEBE_ESTAR);
-        this.repositorioProducto.agregar(producto);
+        return this.repositorioProducto.agregar(producto);
     }
 }

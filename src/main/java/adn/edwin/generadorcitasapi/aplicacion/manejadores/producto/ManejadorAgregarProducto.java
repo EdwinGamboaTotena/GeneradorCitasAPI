@@ -2,6 +2,7 @@ package adn.edwin.generadorcitasapi.aplicacion.manejadores.producto;
 
 import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoProducto;
 import adn.edwin.generadorcitasapi.aplicacion.fabrica.FabricaProducto;
+import adn.edwin.generadorcitasapi.dominio.Producto;
 import adn.edwin.generadorcitasapi.dominio.servicio.producto.ServicioAgregarProducto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,7 @@ public class ManejadorAgregarProducto {
     }
 
     @Transactional
-    public void ejecutar(ComandoProducto comandoProducto) {
-        this.servicioAgregarProducto.ejecutar(fabricaProducto.crearProducto(comandoProducto));
+    public Producto ejecutar(ComandoProducto comandoProducto) {
+        return this.servicioAgregarProducto.ejecutar(fabricaProducto.crearProducto(comandoProducto));
     }
 }
