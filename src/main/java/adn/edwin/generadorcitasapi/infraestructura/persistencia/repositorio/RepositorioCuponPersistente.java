@@ -4,6 +4,7 @@ import adn.edwin.generadorcitasapi.dominio.Cupon;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCupon;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.builder.CuponBuilder;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CuponEntity;
+import adn.edwin.generadorcitasapi.infraestructura.persistencia.exception.NoRecordsException;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.RepositorioCuponJPA;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,7 @@ public class RepositorioCuponPersistente implements RepositorioCupon, Repositori
 
     private static final String ID = "id";
     private static final String CUPON_FIND_BY_ID = "Cupon.findById";
+    private static final String CUPON_NO_ENCONTRADO = "Este cupon no se encuentra registrado.";
 
     private static final Logger LOGGER = LogManager.getLogger(RepositorioCuponPersistente.class);
 
@@ -47,7 +49,7 @@ public class RepositorioCuponPersistente implements RepositorioCupon, Repositori
             return (CuponEntity) query.getSingleResult();
         } catch (NoResultException nre) {
             LOGGER.error(nre.getMessage());
-            return null;
+            throw new NoRecordsException(CUPON_NO_ENCONTRADO);
         }
     }
 }

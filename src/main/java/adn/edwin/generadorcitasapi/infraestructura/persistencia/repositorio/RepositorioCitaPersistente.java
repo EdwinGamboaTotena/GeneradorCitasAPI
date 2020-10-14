@@ -4,6 +4,7 @@ import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.builder.CitaBuilder;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CitaEntity;
+import adn.edwin.generadorcitasapi.infraestructura.persistencia.exception.NoRecordsException;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.RepositorioCitaJPA;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,7 @@ public class RepositorioCitaPersistente implements RepositorioCita, RepositorioC
     private static final String ID = "id";
     private static final String CITA_FIND_BY_ID = "Cita.findById";
     private static final String CITA_FIND_ALL = "Cita.findAll";
+    private static final String CITA_NO_ENCONTRADA = "Esta cita no se encuentra registrada.";
 
     private static final Logger LOGGER = LogManager.getLogger(RepositorioCitaPersistente.class);
 
@@ -60,7 +62,7 @@ public class RepositorioCitaPersistente implements RepositorioCita, RepositorioC
             return (CitaEntity) query.getSingleResult();
         } catch (NoResultException nre) {
             LOGGER.error(nre.getMessage());
-            return null;
+            throw new NoRecordsException(CITA_NO_ENCONTRADA);
         }
     }
 

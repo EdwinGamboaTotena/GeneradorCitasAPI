@@ -5,13 +5,6 @@ import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.Producto
 
 public class ProductoBuilder {
 
-    private static final String INSTANCIA_CLASE_UTILIDAD =
-            "La clase ProdcutoBuilder no debe ser instanciada, es una clase de utilidad";
-
-    private ProductoBuilder() {
-        throw new IllegalStateException(INSTANCIA_CLASE_UTILIDAD);
-    }
-
     public static Producto convertirADominio(ProductoEntity productoEntity) {
 
         Producto producto = null;

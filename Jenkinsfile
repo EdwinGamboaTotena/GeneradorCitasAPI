@@ -43,6 +43,14 @@ pipeline {
 				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 			}
 		}
+
+		stage('Coverage Tests') {
+        	steps{
+        		echo "------------>Coverage Tests<------------"
+        		sh 'gradle jacocoTestReport'
+        		jacocoTestReport '**/build/reports/tests/test/*.html'
+        	}
+       	}
 		
 		stage('Static Code Analysis') {
 			steps{

@@ -3,14 +3,7 @@ package adn.edwin.generadorcitasapi.infraestructura.persistencia.builder;
 import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CitaEntity;
 
-public class CitaBuilder {
-
-    private static final String INSTANCIA_CLASE_UTILIDAD =
-            "La clase CitaBuilder no debe ser instanciada, es una clase de utilidad";
-
-    private CitaBuilder() {
-        throw new IllegalStateException(INSTANCIA_CLASE_UTILIDAD);
-    }
+public final class CitaBuilder {
 
     public static Cita convertirADominio(CitaEntity citaEntity) {
 

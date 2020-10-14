@@ -4,6 +4,7 @@ import adn.edwin.generadorcitasapi.dominio.Producto;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioProducto;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.builder.ProductoBuilder;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.ProductoEntity;
+import adn.edwin.generadorcitasapi.infraestructura.persistencia.exception.NoRecordsException;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.RepositorioProductoJPA;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,7 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
     private static final String ID = "id";
     private static final String PRODUCTO_FIND_BY_ID = "Producto.findById";
     private static final String PRODUCTO_FIND_ALL = "Producto.findAll";
+    private static final String PRODUCTO_NO_ENCONTRADO = "Este producto no se encuentra registrado.";
 
     private static final Logger LOGGER = LogManager.getLogger(RepositorioProductoPersistente.class);
 
@@ -59,7 +61,7 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
             return (ProductoEntity) query.getSingleResult();
         } catch (NoResultException nre) {
             LOGGER.error(nre.getMessage());
-            return null;
+            throw new NoRecordsException(PRODUCTO_NO_ENCONTRADO);
         }
     }
 

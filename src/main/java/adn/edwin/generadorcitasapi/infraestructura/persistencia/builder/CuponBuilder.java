@@ -3,14 +3,7 @@ package adn.edwin.generadorcitasapi.infraestructura.persistencia.builder;
 import adn.edwin.generadorcitasapi.dominio.Cupon;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CuponEntity;
 
-public class CuponBuilder {
-
-    private static final String INSTANCIA_CLASE_UTILIDAD =
-            "La clase CuponBuilder no debe ser instanciada, es una clase de utilidad";
-
-    private CuponBuilder() {
-        throw new IllegalStateException(INSTANCIA_CLASE_UTILIDAD);
-    }
+public final class CuponBuilder {
 
     public static Cupon convertirADominio(CuponEntity cuponEntity) {
         Cupon cupon = null;
