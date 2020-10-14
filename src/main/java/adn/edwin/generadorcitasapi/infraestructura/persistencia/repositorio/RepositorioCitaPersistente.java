@@ -13,12 +13,18 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 @Repository
 public class RepositorioCitaPersistente implements RepositorioCita, RepositorioCitaJPA {
 
     private static final String ID = "id";
     private static final String CITA_FIND_BY_ID = "Cita.findById";
     private static final String CITA_FIND_ALL = "Cita.findAll";
+
+    private static final Logger LOGGER = LogManager.getLogger(RepositorioCitaPersistente.class);
 
     private EntityManager entityManager;
 
@@ -40,10 +46,10 @@ public class RepositorioCitaPersistente implements RepositorioCita, RepositorioC
     @Override
     public List<Cita> listaCitas() {
         List<Cita> listaCitas = new ArrayList<>();
-        obtenerCitasEntity().forEach(citaEntity -> {
-            listaCitas.add(CitaBuilder.convertirADominio(citaEntity));
-        });
-        return null;
+        obtenerCitasEntity().forEach(citaEntity ->
+                listaCitas.add(CitaBuilder.convertirADominio(citaEntity))
+        );
+        return listaCitas;
     }
 
     @Override
@@ -53,6 +59,7 @@ public class RepositorioCitaPersistente implements RepositorioCita, RepositorioC
         try {
             return (CitaEntity) query.getSingleResult();
         } catch (NoResultException nre) {
+            LOGGER.error(nre.getMessage());
             return null;
         }
     }

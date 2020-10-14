@@ -23,9 +23,10 @@ public class ServicioAgregarCita {
     }
 
     public void ejecutar(Cita cita) {
-        validarDiaHabil(cita.getFehcaSolicitud());
-        validarFechaSolicitud(cita.getFehcaSolicitud(), cita.getFechaGeneracion());
+        validarDiaHabil(cita.getFechaSolicitud());
+        validarFechaSolicitud(cita.getFechaSolicitud(), cita.getFechaGeneracion());
 
+        this.repositorioCita.agregar(cita);
     }
 
     public void validarFechaSolicitud(Date fehcaSolicitud, Date fechaGeneracion) {

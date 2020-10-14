@@ -35,7 +35,7 @@ public class CitaTest {
         Cita cita = citaTestDataBuilder.build();
         DateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
         String fechaGeneracion = dateFormat.format(cita.getFechaGeneracion());
-        String fechaSolicitud = dateFormat.format(cita.getFehcaSolicitud());
+        String fechaSolicitud = dateFormat.format(cita.getFechaSolicitud());
         //assert
         assertEquals(CEDULA, cita.getCedulaCliente());
         assertEquals(PRODUCTO, cita.getProductoSolicitado());
@@ -55,7 +55,7 @@ public class CitaTest {
         Cita cita = citaTestDataBuilder.build();
         DateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
         String fechaGeneracion = dateFormat.format(cita.getFechaGeneracion());
-        String fechaSolicitud = dateFormat.format(cita.getFehcaSolicitud());
+        String fechaSolicitud = dateFormat.format(cita.getFechaSolicitud());
         //assert
         assertEquals(CEDULA, cita.getCedulaCliente());
         assertEquals(PRODUCTO, cita.getProductoSolicitado());

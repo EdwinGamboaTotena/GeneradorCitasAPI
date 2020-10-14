@@ -16,7 +16,7 @@ public class FabricaCita {
 
     public Cita crearCita(ComandoCita comandoCita) {
         Producto producto = fabricaProducto.crearProducto(comandoCita.getProductoSolicitado());
-        return new Cita(comandoCita.getId(), comandoCita.getFechaGeneracion(), comandoCita.getFehcaSolicitud(),
+        return new Cita(comandoCita.getId(), comandoCita.getFechaGeneracion(), comandoCita.getFechaSolicitud(),
                 producto, comandoCita.getCuponUsado(), comandoCita.getCedulaCliente(), producto.getPrecio());
     }
 }

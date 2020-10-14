@@ -13,16 +13,16 @@ public class ComandoCita {
     @JsonFormat(pattern = DATE_FORMAT)
     private Date fechaGeneracion;
     @JsonFormat(pattern = DATE_FORMAT)
-    private Date fehcaSolicitud;
+    private Date fechaSolicitud;
     private ComandoProducto productoSolicitado;
     private Cupon cuponUsado;
     private String cedulaCliente;
 
-    public ComandoCita(Long id, Date fechaGeneracion, Date fehcaSolicitud, ComandoProducto productoSolicitado,
+    public ComandoCita(Long id, Date fechaGeneracion, Date fechaSolicitud, ComandoProducto productoSolicitado,
                        Cupon cuponUsado, String cedulaCliente) {
         this.id = id;
         this.fechaGeneracion = fechaGeneracion;
-        this.fehcaSolicitud = fehcaSolicitud;
+        this.fechaSolicitud = fechaSolicitud;
         this.productoSolicitado = productoSolicitado;
         this.cuponUsado = cuponUsado;
         this.cedulaCliente = cedulaCliente;
@@ -32,7 +32,6 @@ public class ComandoCita {
         return fechaGeneracion;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -41,8 +40,8 @@ public class ComandoCita {
         return cuponUsado;
     }
 
-    public Date getFehcaSolicitud() {
-        return fehcaSolicitud;
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
     }
 
     public ComandoProducto getProductoSolicitado() {

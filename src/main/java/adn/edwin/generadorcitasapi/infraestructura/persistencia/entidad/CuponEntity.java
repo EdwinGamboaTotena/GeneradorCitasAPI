@@ -13,7 +13,7 @@ public class CuponEntity {
     @Column(nullable = false)
     private double porcentajeDescuento;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="ID_CITA",referencedColumnName="id")
     private CitaEntity citaGeneradora;
 

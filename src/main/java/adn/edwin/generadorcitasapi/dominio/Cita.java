@@ -10,18 +10,18 @@ public class Cita {
 
     private Long id;
     private Date fechaGeneracion;
-    private Date fehcaSolicitud;
+    private Date fechaSolicitud;
     private Producto productoSolicitado;
     private Cupon cuponUsado;
     private String cedulaCliente;
     private double precioProducto;
 
-    public Cita(Long id, Date fechaGeneracion, Date fehcaSolicitud, Producto productoSolicitado,
+    public Cita(Long id, Date fechaGeneracion, Date fechaSolicitud, Producto productoSolicitado,
                 Cupon cuponUsado, String cedulaCliente, double precioProducto) {
         validarCedula(cedulaCliente);
         this.id = id;
         this.fechaGeneracion = fechaGeneracion;
-        this.fehcaSolicitud = fehcaSolicitud;
+        this.fechaSolicitud = fechaSolicitud;
         this.productoSolicitado = productoSolicitado;
         this.cuponUsado = cuponUsado;
         this.cedulaCliente = cedulaCliente;
@@ -42,8 +42,8 @@ public class Cita {
         return fechaGeneracion;
     }
 
-    public Date getFehcaSolicitud() {
-        return fehcaSolicitud;
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
     }
 
     public Producto getProductoSolicitado() {

@@ -11,11 +11,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Repository
 public class RepositorioCuponPersistente implements RepositorioCupon, RepositorioCuponJPA {
 
     private static final String ID = "id";
-    private static final String CUPON_FIND_BY_ID = "Cita.findById";
+    private static final String CUPON_FIND_BY_ID = "Cupon.findById";
+
+    private static final Logger LOGGER = LogManager.getLogger(RepositorioCuponPersistente.class);
 
     private EntityManager entityManager;
 
@@ -40,8 +45,8 @@ public class RepositorioCuponPersistente implements RepositorioCupon, Repositori
         query.setParameter(ID, id);
         try {
             return (CuponEntity) query.getSingleResult();
-        } catch (
-                NoResultException nre) {
+        } catch (NoResultException nre) {
+            LOGGER.error(nre.getMessage());
             return null;
         }
     }

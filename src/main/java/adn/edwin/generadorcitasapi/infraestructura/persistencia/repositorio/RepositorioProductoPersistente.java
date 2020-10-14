@@ -13,12 +13,17 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Repository
 public class RepositorioProductoPersistente implements RepositorioProducto, RepositorioProductoJPA {
 
     private static final String ID = "id";
     private static final String PRODUCTO_FIND_BY_ID = "Producto.findById";
     private static final String PRODUCTO_FIND_ALL = "Producto.findAll";
+
+    private static final Logger LOGGER = LogManager.getLogger(RepositorioProductoPersistente.class);
 
     private EntityManager entityManager;
 
@@ -40,9 +45,9 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
     @Override
     public List<Producto> listaProductos() {
         List<Producto> listaProductos = new ArrayList<>();
-        obtenerProductosEntity().forEach(productoEntity -> {
-            listaProductos.add(ProductoBuilder.convertirADominio(productoEntity));
-        });
+        obtenerProductosEntity().forEach(productoEntity ->
+                listaProductos.add(ProductoBuilder.convertirADominio(productoEntity))
+        );
         return listaProductos;
     }
 
@@ -53,6 +58,7 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
         try {
             return (ProductoEntity) query.getSingleResult();
         } catch (NoResultException nre) {
+            LOGGER.error(nre.getMessage());
             return null;
         }
     }

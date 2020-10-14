@@ -5,12 +5,19 @@ import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CitaEnti
 
 public class CitaBuilder {
 
+    private static final String INSTANCIA_CLASE_UTILIDAD =
+            "La clase CitaBuilder no debe ser instanciada, es una clase de utilidad";
+
+    private CitaBuilder() {
+        throw new IllegalStateException(INSTANCIA_CLASE_UTILIDAD);
+    }
+
     public static Cita convertirADominio(CitaEntity citaEntity) {
 
         Cita cita = null;
 
         if (citaEntity != null) {
-            cita = new Cita(citaEntity.getId(), citaEntity.getFechaGeneracion(), citaEntity.getFehcaSolicitud(),
+            cita = new Cita(citaEntity.getId(), citaEntity.getFechaGeneracion(), citaEntity.getFechaSolicitud(),
                     ProductoBuilder.convertirADominio(citaEntity.getProductoSolicitado()),
                     CuponBuilder.convertirADominio(citaEntity.getCuponUsado()),
                     citaEntity.getCedulaCliente(), citaEntity.getPrecioProducto());
@@ -23,7 +30,7 @@ public class CitaBuilder {
 
         CitaEntity citaEntity = new CitaEntity();
         citaEntity.setId(cita.getId());
-        citaEntity.setFehcaSolicitud(cita.getFehcaSolicitud());
+        citaEntity.setFechaSolicitud(cita.getFechaSolicitud());
         citaEntity.setCedulaCliente(cita.getCedulaCliente());
         citaEntity.setPrecioProducto(cita.getPrecioProducto());
         citaEntity.setProductoSolicitado(ProductoBuilder.convertirAEntity(cita.getProductoSolicitado()));

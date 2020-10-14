@@ -1,5 +1,7 @@
 package adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,23 +10,27 @@ import java.util.Date;
 @NamedQuery(name = "Cita.findAll", query = "SELECT cita FROM Cita cita")
 public class CitaEntity {
 
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = DATE_FORMAT)
     @Column(nullable = false, updatable = false)
     private Date fechaGeneracion;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = DATE_FORMAT)
     @Column(nullable = false)
-    private Date fehcaSolicitud;
+    private Date fechaSolicitud;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "id", nullable = false)
     private ProductoEntity productoSolicitado;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CUPON", referencedColumnName = "id")
     private CuponEntity cuponUsado;
 
@@ -51,12 +57,12 @@ public class CitaEntity {
         return fechaGeneracion;
     }
 
-    public Date getFehcaSolicitud() {
-        return fehcaSolicitud;
+    public Date getFechaSolicitud() {
+        return fechaSolicitud;
     }
 
-    public void setFehcaSolicitud(Date fehcaSolicitud) {
-        this.fehcaSolicitud = fehcaSolicitud;
+    public void setFechaSolicitud(Date fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
     }
 
     public ProductoEntity getProductoSolicitado() {
