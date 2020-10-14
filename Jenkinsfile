@@ -48,7 +48,6 @@ pipeline {
         	steps{
         		echo "------------>Coverage Tests<------------"
         		sh 'gradle jacocoTestReport'
-        		jacocoTestReport '**/build/reports/jacoco/test/*.html'
         	}
        	}
 		
