@@ -36,20 +36,14 @@ pipeline {
 			}
 		}
 		
-		stage('Unit Tests') {
+		stage('Unit Tests And Coverage') {
 			steps{
 				echo "------------>Unit Tests<------------"
-				sh 'gradle test'
+				sh 'gradle --b ./build.gradle test'
 				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
+			    sh 'gradle --b ./build.gradle jacocoTestReport'
 			}
 		}
-
-		stage('Coverage Tests') {
-        	steps{
-        		echo "------------>Coverage Tests<------------"
-        		sh 'gradle jacocoTestReport'
-        	}
-       	}
 		
 		stage('Static Code Analysis') {
 			steps{
