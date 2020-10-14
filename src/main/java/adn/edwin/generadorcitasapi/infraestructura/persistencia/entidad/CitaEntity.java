@@ -54,11 +54,11 @@ public class CitaEntity {
     }
 
     public Date getFechaGeneracion() {
-        return fechaGeneracion;
+        return (Date) fechaGeneracion.clone();
     }
 
     public Date getFechaSolicitud() {
-        return fechaSolicitud;
+        return (Date) fechaSolicitud.clone();
     }
 
     public void setFechaSolicitud(Date fechaSolicitud) {

@@ -20,8 +20,8 @@ public class Cita {
                 Cupon cuponUsado, String cedulaCliente, double precioProducto) {
         validarCedula(cedulaCliente);
         this.id = id;
-        this.fechaGeneracion = fechaGeneracion;
-        this.fechaSolicitud = fechaSolicitud;
+        this.fechaGeneracion = (Date) fechaGeneracion.clone();
+        this.fechaSolicitud = (Date) fechaSolicitud.clone();
         this.productoSolicitado = productoSolicitado;
         this.cuponUsado = cuponUsado;
         this.cedulaCliente = cedulaCliente;
@@ -39,11 +39,11 @@ public class Cita {
     }
 
     public Date getFechaGeneracion() {
-        return fechaGeneracion;
+        return (Date) fechaGeneracion.clone();
     }
 
     public Date getFechaSolicitud() {
-        return fechaSolicitud;
+        return (Date) fechaSolicitud.clone();
     }
 
     public Producto getProductoSolicitado() {

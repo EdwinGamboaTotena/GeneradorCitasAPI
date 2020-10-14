@@ -3,7 +3,7 @@ package adn.edwin.generadorcitasapi.infraestructura.persistencia.builder;
 import adn.edwin.generadorcitasapi.dominio.Producto;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.ProductoEntity;
 
-public class ProductoBuilder {
+public final class ProductoBuilder {
 
     private static final String INSTANCIA_CLASE_UTILIDAD =
             "La clase ProdcutoBuilder no debe ser instanciada, es una clase de utilidad";
