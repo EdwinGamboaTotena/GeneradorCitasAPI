@@ -48,7 +48,7 @@ public class RepositorioCuponPersistente implements RepositorioCupon, Repositori
         try {
             return (CuponEntity) query.getSingleResult();
         } catch (NoResultException nre) {
-            LOGGER.error(nre.getMessage());
+            LOGGER.warn(nre.getMessage());
             throw new NoRecordsException(CUPON_NO_ENCONTRADO);
         }
     }

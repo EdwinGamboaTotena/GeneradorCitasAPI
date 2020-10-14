@@ -61,7 +61,7 @@ public class RepositorioCitaPersistente implements RepositorioCita, RepositorioC
         try {
             return (CitaEntity) query.getSingleResult();
         } catch (NoResultException nre) {
-            LOGGER.error(nre.getMessage());
+            LOGGER.warn(nre.getMessage());
             throw new NoRecordsException(CITA_NO_ENCONTRADA);
         }
     }

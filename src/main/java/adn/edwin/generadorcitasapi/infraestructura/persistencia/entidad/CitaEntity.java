@@ -41,7 +41,7 @@ public class CitaEntity {
     private double precioProducto;
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         this.fechaGeneracion = new Date();
     }
 
@@ -62,7 +62,7 @@ public class CitaEntity {
     }
 
     public void setFechaSolicitud(Date fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
+        this.fechaSolicitud = (Date) fechaSolicitud.clone();
     }
 
     public ProductoEntity getProductoSolicitado() {

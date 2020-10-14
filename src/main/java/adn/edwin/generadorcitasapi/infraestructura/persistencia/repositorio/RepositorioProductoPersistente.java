@@ -60,8 +60,8 @@ public class RepositorioProductoPersistente implements RepositorioProducto, Repo
         try {
             return (ProductoEntity) query.getSingleResult();
         } catch (NoResultException nre) {
-            LOGGER.error(nre.getMessage());
-            throw new RuntimeException(PRODUCTO_NO_ENCONTRADO);
+            LOGGER.warn(nre.getMessage());
+            throw new NoRecordsException(PRODUCTO_NO_ENCONTRADO);
         }
     }
 
