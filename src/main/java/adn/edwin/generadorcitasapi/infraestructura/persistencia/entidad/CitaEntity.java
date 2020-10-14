@@ -6,8 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "Cita")
-@NamedQuery(name = "Cita.findById", query = "SELECT cita FROM Cita cita WHERE cita.id = :id")
-@NamedQuery(name = "Cita.findAll", query = "SELECT cita FROM Cita cita")
 public class CitaEntity {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";

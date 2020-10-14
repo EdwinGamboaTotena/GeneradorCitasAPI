@@ -50,4 +50,8 @@ public class Cupon {
     public boolean isUsado() {
         return usado;
     }
+
+    public void setUsado(boolean usado) {
+        this.usado = usado;
+    }
 }

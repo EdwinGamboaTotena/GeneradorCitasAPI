@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RepositorioProducto {
 
-    void agregar(Producto producto);
+    Producto agregar(Producto producto);
 
     Producto obtener(Long id);
 

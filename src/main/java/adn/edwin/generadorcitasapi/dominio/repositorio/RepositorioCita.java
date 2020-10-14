@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RepositorioCita {
 
-    void agregar(Cita cita);
+    Cita agregar(Cita cita);
 
     Cita obtener(Long id);
 

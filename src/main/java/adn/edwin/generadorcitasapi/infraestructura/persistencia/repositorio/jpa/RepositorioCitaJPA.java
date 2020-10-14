@@ -1,12 +1,9 @@
 package adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa;
 
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CitaEntity;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+public interface RepositorioCitaJPA extends CrudRepository<CitaEntity, Long> {
 
-public interface RepositorioCitaJPA {
 
-    CitaEntity obtenerCitaEntityPorId(Long id);
-    
-    List<CitaEntity> obtenerCitasEntity();
 }
