@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class ServicioAgregarCita {
 
-    private static final String ID_NO_DEBE_ESTAR = "Si se quiere agregar una nueva cita el ID debe ser 0 o null.";
+    public static final String ID_NO_DEBE_ESTAR = "Si se quiere agregar una nueva cita el ID debe ser 0 o null.";
     public static final String FEHCA_SOLICITADA_ANTERIOR_FECHA_GENERADA =
             "La fecha a reservar no puede ser anteior o igual a la fecha en que se realizo la solicitud.";
     public static final String NO_SE_PUEDEN_RESERVAR_LOS_DOMINGOS =
@@ -22,14 +22,12 @@ public class ServicioAgregarCita {
     public static final String EL_CUPON_YA_ESTA_USADO = "El cupon ingresado ya a sido usado antes.";
 
     private final RepositorioCita repositorioCita;
-    private final ServicioObtenerCupon servicioObtenerCupon;
     private final ServicioAgregarCupon servicioAgregarCupon;
     private final ServicioEditarCupon servicioEditarCupon;
 
-    public ServicioAgregarCita(RepositorioCita repositorioCita, ServicioObtenerCupon servicioObtenerCupon,
-                               ServicioAgregarCupon servicioAgregarCupon, ServicioEditarCupon servicioEditarCupon) {
+    public ServicioAgregarCita(RepositorioCita repositorioCita, ServicioAgregarCupon servicioAgregarCupon,
+                               ServicioEditarCupon servicioEditarCupon) {
         this.repositorioCita = repositorioCita;
-        this.servicioObtenerCupon = servicioObtenerCupon;
         this.servicioAgregarCupon = servicioAgregarCupon;
         this.servicioEditarCupon = servicioEditarCupon;
     }
@@ -41,6 +39,7 @@ public class ServicioAgregarCita {
         if (cita.getCuponUsado() != null) {
             validarCupon(cita.getCuponUsado());
             cita.getCuponUsado().setUsado(true);
+            this.servicioEditarCupon.ejecutar(cita.getCuponUsado());
         } else if (cita.getProductoSolicitado().isGeneraCupo()) {
             Cupon cupon = new Cupon(null, cita.getProductoSolicitado().getPorcetajeCuponGenerar(),
                     cita, false);
@@ -68,7 +67,6 @@ public class ServicioAgregarCita {
     }
 
     public void validarCupon(Cupon cupon) {
-        cupon = this.servicioObtenerCupon.ejecutar(cupon.getId());
         if (cupon.isUsado())
             throw new CitaException(EL_CUPON_YA_ESTA_USADO);
     }

@@ -15,6 +15,7 @@ public class CitaTestDataBuilder {
     private static final String FORMATO_FECHA = "yyyy-MM-dd";
     private static final String FECHA_GENERACION = "2020-10-09";
     private static final String FECHA_SOLICITUD = "2020-11-09";
+    private static final Long ID = 25L;
     private static final Producto PRODUCTO = new ProductoTestDataBuilder().build();
     private static final ComandoProducto COMANDO_PRODUCTO = new ProductoTestDataBuilder().buildComando();
     private static final Cupon CUPON = null;
@@ -23,6 +24,7 @@ public class CitaTestDataBuilder {
 
     private Date fechaGeneracion;
     private Date fehcaSolicitud;
+    private Long id;
     private Producto productoSolicitado;
     private Cupon cuponUsado;
     private String cedulaCliente;
@@ -36,6 +38,7 @@ public class CitaTestDataBuilder {
         } catch (ParseException parseException) {
             System.out.println(parseException);
         }
+        this.id = ID;
         this.productoSolicitado = PRODUCTO;
         this.precioProducto = PRECIO_PRODUCTO;
         this.cuponUsado = CUPON;
@@ -58,6 +61,11 @@ public class CitaTestDataBuilder {
         } catch (ParseException parseException) {
             System.out.println(parseException);
         }
+        return this;
+    }
+
+    public CitaTestDataBuilder conId(Long id) {
+        this.id = id;
         return this;
     }
 
@@ -84,12 +92,12 @@ public class CitaTestDataBuilder {
     }
 
     public Cita build() {
-        return new Cita(null, fechaGeneracion, fehcaSolicitud, productoSolicitado, cuponUsado,
+        return new Cita(id, fechaGeneracion, fehcaSolicitud, productoSolicitado, cuponUsado,
                 cedulaCliente, precioProducto);
     }
 
     public ComandoCita buildComando() {
-        return new ComandoCita(null, fechaGeneracion, fehcaSolicitud, comandoProducto, cuponUsado,
+        return new ComandoCita(id, fechaGeneracion, fehcaSolicitud, comandoProducto, cuponUsado,
                 cedulaCliente);
     }
 

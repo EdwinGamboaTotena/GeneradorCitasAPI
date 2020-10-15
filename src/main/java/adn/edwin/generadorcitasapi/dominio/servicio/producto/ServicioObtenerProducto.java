@@ -6,7 +6,7 @@ import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioProducto;
 
 public class ServicioObtenerProducto {
 
-    private static final String PRODUCTO_NO_ENCONTRADO = "Este producto no se encuentra registrado.";
+    public static final String PRODUCTO_NO_ENCONTRADO = "Este producto no se encuentra registrado.";
 
     private RepositorioProducto repositorioProducto;
 

@@ -5,7 +5,6 @@ import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.builder.CitaBuilder;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CitaEntity;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.RepositorioCitaJPA;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,15 +21,8 @@ public class RepositorioCitaPersistente implements RepositorioCita {
 
     @Override
     public Cita agregar(Cita cita) {
-        try {
-            CitaEntity citaPersistida = repositorioCitaJPA.save(CitaBuilder.convertirAEntidad(cita));
-            return CitaBuilder.convertirADominio(citaPersistida);
-        } catch (InvalidDataAccessApiUsageException ida) {
-            System.out.println(ida.getMessage());
-            System.out.println(ida.getCause());
-            return null;
-        }
-
+        CitaEntity citaPersistida = repositorioCitaJPA.save(CitaBuilder.convertirAEntidad(cita));
+        return CitaBuilder.convertirADominio(citaPersistida);
     }
 
     @Override

@@ -33,6 +33,18 @@ public class CuponTest {
     }
 
     @Test
+    public void setUsado() {
+        //arange
+        CuponTestDataBuilder cuponTestDataBuilder = new CuponTestDataBuilder()
+                .conInformacionUsado(USADO);
+        //act
+        Cupon cupon = cuponTestDataBuilder.build();
+        cupon.setUsado(true);
+        //assert
+        assertEquals(true, cupon.isUsado());
+    }
+
+    @Test
     public void cuponErrorPorcentajeDescuento() {
         CuponTestDataBuilder cuponTestDataBuilder = new CuponTestDataBuilder()
                 .conPorcentajeDescuento(PORCENTAJE_DESCUENTO_ERROR);

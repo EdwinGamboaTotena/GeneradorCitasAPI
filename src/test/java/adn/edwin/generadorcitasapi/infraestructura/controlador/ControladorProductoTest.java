@@ -1,4 +1,4 @@
-package adn.edwin.generadorcitasapi.infraestructura;
+package adn.edwin.generadorcitasapi.infraestructura.controlador;
 
 import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoProducto;
 import adn.edwin.generadorcitasapi.testdatabuilder.ProductoTestDataBuilder;
@@ -60,7 +60,7 @@ public class ControladorProductoTest {
     @Test
     public void agregarProducto() throws Exception
     {
-        ComandoProducto comandoProducto= new ProductoTestDataBuilder().buildComando();
+        ComandoProducto comandoProducto= new ProductoTestDataBuilder().conId(null).buildComando();
         mvc.perform( MockMvcRequestBuilders
                 .post("/producto")
                 .content(objectMapper.writeValueAsString(comandoProducto))

@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 
 public class ProductoTest {
 
+    private static final Long ID = 32L;
     private static final String NOMBRE = "Amigos";
     private static final double PRECIO = 35;
     private static final boolean GENERA_CUPON = true;
@@ -20,16 +21,16 @@ public class ProductoTest {
 
     @Test
     public void crearProdctoTest() {
-
         //arange
         ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder()
-                .conNombre(NOMBRE).conPrecio(PRECIO).conGeneradorCupon(GENERA_CUPON)
+                .conId(ID).conNombre(NOMBRE).conPrecio(PRECIO).conGeneradorCupon(GENERA_CUPON)
                 .conPorcentajeDescuento(PORCENTAJE_DESCUENTO_GENERAR);
 
         //act
         Producto producto = productoTestDataBuilder.build();
 
         //assert
+        assertEquals(ID, producto.getId());
         assertEquals(NOMBRE, producto.getNombre());
         assertEquals(PRECIO, producto.getPrecio(), 0);
         assertEquals(GENERA_CUPON, producto.isGeneraCupo());

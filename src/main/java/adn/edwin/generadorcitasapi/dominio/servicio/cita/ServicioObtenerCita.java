@@ -6,7 +6,7 @@ import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
 
 public class ServicioObtenerCita {
 
-    private static final String CITA_NO_ENCONTRADA = "Esta cita no se encuentra registrada.";
+    public static final String CITA_NO_ENCONTRADA = "Esta cita no se encuentra registrada.";
 
     private final RepositorioCita repositorioCita;
 

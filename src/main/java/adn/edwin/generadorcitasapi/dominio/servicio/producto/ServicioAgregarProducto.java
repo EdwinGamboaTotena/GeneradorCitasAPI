@@ -6,7 +6,7 @@ import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioProducto;
 
 public class ServicioAgregarProducto {
 
-    private static final String ID_NO_DEBE_ESTAR = "Si se quiere agregar un nuevo producto el ID debe ser 0 o null.";
+    public static final String ID_NO_DEBE_ESTAR = "Si se quiere agregar un nuevo producto el ID debe ser 0 o null.";
 
     private final RepositorioProducto repositorioProducto;
 

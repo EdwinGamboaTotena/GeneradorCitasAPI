@@ -1,4 +1,4 @@
-package adn.edwin.generadorcitasapi.infraestructura.controllador;
+package adn.edwin.generadorcitasapi.infraestructura.controlador;
 
 import adn.edwin.generadorcitasapi.aplicacion.manejadores.cupon.ManejadorObtenerCupon;
 import adn.edwin.generadorcitasapi.dominio.Cupon;

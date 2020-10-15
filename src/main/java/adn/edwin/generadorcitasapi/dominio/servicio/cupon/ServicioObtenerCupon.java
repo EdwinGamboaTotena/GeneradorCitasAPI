@@ -6,7 +6,7 @@ import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCupon;
 
 public class ServicioObtenerCupon {
 
-    private static final String CUPON_NO_ENCONTRADO = "Este cupon no se encuentra registrado.";
+    public static final String CUPON_NO_ENCONTRADO = "Este cupon no se encuentra registrado.";
 
     private RepositorioCupon repositorioCupon;
 

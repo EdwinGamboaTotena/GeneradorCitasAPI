@@ -1,4 +1,4 @@
-package adn.edwin.generadorcitasapi.infraestructura.controllador;
+package adn.edwin.generadorcitasapi.infraestructura.controlador;
 
 import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoProducto;
 import adn.edwin.generadorcitasapi.aplicacion.manejadores.producto.ManejadorAgregarProducto;

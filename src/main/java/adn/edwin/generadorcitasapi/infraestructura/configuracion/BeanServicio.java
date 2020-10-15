@@ -60,10 +60,8 @@ public class BeanServicio {
 
     @Bean
     public ServicioAgregarCita servicioAgregarCita(RepositorioCita repositorioCita,
-                                                   ServicioObtenerCupon servicioObtenerCupon,
                                                    ServicioAgregarCupon servicioAgregarCupon,
                                                    ServicioEditarCupon servicioEditarCupon) {
-        return new ServicioAgregarCita(repositorioCita, servicioObtenerCupon,
-                servicioAgregarCupon, servicioEditarCupon);
+        return new ServicioAgregarCita(repositorioCita, servicioAgregarCupon, servicioEditarCupon);
     }
 }

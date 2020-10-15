@@ -11,6 +11,7 @@ public class GeneradorCitasApiApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		GeneradorCitasApiApplication.main(new String[] {});
 	}
 
 }
