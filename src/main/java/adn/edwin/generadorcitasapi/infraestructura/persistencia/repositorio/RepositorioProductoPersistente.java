@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class RepositorioProductoPersistente implements RepositorioProducto {
 
-    private RepositorioProductoJPA repositorioProductoJPA;
+    private final RepositorioProductoJPA repositorioProductoJPA;
 
     public RepositorioProductoPersistente(RepositorioProductoJPA repositorioProductoJPA) {
         this.repositorioProductoJPA = repositorioProductoJPA;

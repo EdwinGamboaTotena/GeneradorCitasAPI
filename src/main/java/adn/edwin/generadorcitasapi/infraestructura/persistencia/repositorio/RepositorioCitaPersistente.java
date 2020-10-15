@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class RepositorioCitaPersistente implements RepositorioCita {
 
-    private RepositorioCitaJPA repositorioCitaJPA;
+    private final RepositorioCitaJPA repositorioCitaJPA;
 
     public RepositorioCitaPersistente(RepositorioCitaJPA repositorioCitaJPA) {
         this.repositorioCitaJPA = repositorioCitaJPA;

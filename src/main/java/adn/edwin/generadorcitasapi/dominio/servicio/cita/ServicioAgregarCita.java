@@ -6,7 +6,6 @@ import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
 import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioAgregarCupon;
 import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioEditarCupon;
-import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioObtenerCupon;
 
 import java.util.Calendar;
 import java.util.Date;

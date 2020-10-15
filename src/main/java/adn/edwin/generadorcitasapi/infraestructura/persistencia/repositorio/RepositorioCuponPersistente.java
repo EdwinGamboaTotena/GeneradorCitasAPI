@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RepositorioCuponPersistente implements RepositorioCupon {
 
-    private RepositorioCuponJPA repositorioCuponJPA;
+    private final RepositorioCuponJPA repositorioCuponJPA;
 
     public RepositorioCuponPersistente(RepositorioCuponJPA repositorioCuponJPA) {
         this.repositorioCuponJPA = repositorioCuponJPA;
