@@ -36,10 +36,8 @@ public class ServicioAgregarCita {
             validarCupon(cita.getCuponUsado());
             cita.getCuponUsado().setUsado(true);
             this.servicioEditarCupon.ejecutar(cita.getCuponUsado());
-        } else if (cita.getProductoSolicitado().isGeneraCupo()) {
-            //Cupon cupon = new Cupon(null, cita.getProductoSolicitado().getPorcetajeCuponGenerar(),
-            //        cita, false);
         }
+
         return this.repositorioCita.agregar(cita);
     }
 
