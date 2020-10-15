@@ -1,5 +1,7 @@
 package adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity(name = "Cupon")
@@ -12,8 +14,9 @@ public class CuponEntity {
     @Column(nullable = false)
     private double porcentajeDescuento;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_CITA", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ID_CITA", referencedColumnName = "id", unique = true)
+    @JsonBackReference
     private CitaEntity citaGeneradora;
 
     @Column(nullable = false)

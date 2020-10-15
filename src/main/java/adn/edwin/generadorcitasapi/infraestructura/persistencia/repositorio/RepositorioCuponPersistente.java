@@ -6,6 +6,7 @@ import adn.edwin.generadorcitasapi.infraestructura.persistencia.builder.CuponBui
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad.CuponEntity;
 import adn.edwin.generadorcitasapi.infraestructura.persistencia.repositorio.jpa.RepositorioCuponJPA;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class RepositorioCuponPersistente implements RepositorioCupon {
@@ -17,6 +18,7 @@ public class RepositorioCuponPersistente implements RepositorioCupon {
     }
 
     @Override
+    @Transactional
     public Cupon agregar(Cupon cupon) {
         CuponEntity cuponPersistido = repositorioCuponJPA.save(CuponBuilder.convertirEntity(cupon));
         return CuponBuilder.convertirADominio(cuponPersistido);

@@ -9,9 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class GeneradorCitasApiApplicationTests {
 
-	@Test
-	public void contextLoads() {
-		GeneradorCitasApiApplication.main(new String[] {});
-	}
+    @Test
+    public void contextLoads() {
+        GeneradorCitasApiApplication.main(new String[]{});
+    }
 
 }

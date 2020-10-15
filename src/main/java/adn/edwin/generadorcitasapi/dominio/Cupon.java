@@ -24,15 +24,13 @@ public class Cupon {
     }
 
     private void validarPorcentajeCupon(double procentaje) {
-        if (procentaje < 0.0 || procentaje > 100) {
+        if (procentaje < 0.0 || procentaje > 100)
             throw new CuponException(PORCENTAJE_DESCUENTO_RANGO_INVALIDO);
-        }
     }
 
     private void validarCita(Cita citaGeneradora) {
-        if (citaGeneradora == null) {
+        if (citaGeneradora == null)
             throw new CuponException(CITA_GENERADORA_NO_PUEDE_SER_VACIA);
-        }
     }
 
     public Long getId() {
@@ -54,4 +52,5 @@ public class Cupon {
     public void setUsado(boolean usado) {
         this.usado = usado;
     }
+
 }

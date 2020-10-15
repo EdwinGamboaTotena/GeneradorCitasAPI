@@ -14,7 +14,7 @@ public final class ProductoBuilder {
 
     public static Producto convertirADominio(ProductoEntity productoEntity) {
         Producto producto = null;
-        if (productoEntity != null) {
+        if (productoEntity != null && productoEntity.getId() != null) {
             producto = new Producto(productoEntity.getId(), productoEntity.getNombre(), productoEntity.getPrecio(),
                     productoEntity.isGeneraCupon(), productoEntity.getPorcentajeCuponGenerar());
         }
@@ -22,8 +22,9 @@ public final class ProductoBuilder {
     }
 
     public static ProductoEntity convertirAEntity(Producto producto) {
-        ProductoEntity productoEntity = new ProductoEntity();
+        ProductoEntity productoEntity = null;
         if (producto != null) {
+            productoEntity = new ProductoEntity();
             productoEntity.setId(producto.getId());
             productoEntity.setNombre(producto.getNombre());
             productoEntity.setPrecio(producto.getPrecio());

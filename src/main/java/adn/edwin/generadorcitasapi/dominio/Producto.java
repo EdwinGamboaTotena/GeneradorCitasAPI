@@ -27,21 +27,18 @@ public class Producto {
     }
 
     private void validarNombre(String nombre) {
-        if (nombre == null || nombre.trim().length() == 0) {
+        if (nombre == null || nombre.trim().length() == 0)
             throw new ProductoException(PRODUCTO_DEBE_TENER_NOMBRE);
-        }
     }
 
     private void validarPrecio(double precio) {
-        if (precio <= 0.0) {
+        if (precio <= 0.0)
             throw new ProductoException(PRODUCTO_DEBE_TENER_PRECIO);
-        }
     }
 
     private void validarPorcentajeCupon(double procentaje) {
-        if (procentaje < 0.0 || procentaje > 100) {
+        if (procentaje < 0.0 || procentaje > 100)
             throw new ProductoException(PORCENTAJE_CUPON_RANGO_INVALIDO);
-        }
     }
 
     public Long getId() {

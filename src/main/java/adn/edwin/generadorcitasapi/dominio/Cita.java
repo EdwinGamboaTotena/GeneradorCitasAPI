@@ -29,9 +29,8 @@ public class Cita {
     }
 
     private void validarCedula(String cedula) {
-        if (cedula == null || cedula.trim().length() == 0) {
+        if (cedula == null || cedula.trim().length() == 0)
             throw new CitaException(CEDULA_OBLIGATORIA);
-        }
     }
 
     public Long getId() {
@@ -60,5 +59,13 @@ public class Cita {
 
     public double getPrecioProducto() {
         return precioProducto;
+    }
+
+    public void setProductoSolicitado(Producto productoSolicitado) {
+        this.productoSolicitado = productoSolicitado;
+    }
+
+    public void setCuponUsado(Cupon cuponUsado) {
+        this.cuponUsado = cuponUsado;
     }
 }

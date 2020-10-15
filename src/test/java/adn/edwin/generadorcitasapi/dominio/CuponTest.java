@@ -39,9 +39,9 @@ public class CuponTest {
                 .conInformacionUsado(USADO);
         //act
         Cupon cupon = cuponTestDataBuilder.build();
-        cupon.setUsado(true);
+        cupon.setUsado(!USADO);
         //assert
-        assertEquals(true, cupon.isUsado());
+        assertEquals(!USADO, cupon.isUsado());
     }
 
     @Test

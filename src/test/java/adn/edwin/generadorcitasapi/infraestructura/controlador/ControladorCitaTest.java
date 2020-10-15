@@ -40,7 +40,7 @@ public class ControladorCitaTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.cuponUsado.id").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.cuponUsado.porcentajeDescuento").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.fechaGeneracion").value("2020-10-10"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.fechaSolicitud").value("2020-10-13"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.fechaSolicitud").value("2020-10-14"));
     }
 
     @Test
@@ -50,14 +50,14 @@ public class ControladorCitaTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(3))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(4))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].cedulaCliente").value("1234"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].precioProducto").value(20000))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].productoSolicitado.id").value(20))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].productoSolicitado.precio").value(20000))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].precioProducto").value(20))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].productoSolicitado.id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].productoSolicitado.precio").value(20))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].cuponUsado").isEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].fechaGeneracion").value("2020-10-10"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].fechaSolicitud").value("2020-10-11"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].fechaSolicitud").value("2020-10-12"));
     }
 }

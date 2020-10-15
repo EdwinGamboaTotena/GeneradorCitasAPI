@@ -14,7 +14,7 @@ public final class CitaBuilder {
 
     public static Cita convertirADominio(CitaEntity citaEntity) {
         Cita cita = null;
-        if (citaEntity != null) {
+        if (citaEntity != null && citaEntity.getId() != null) {
             cita = new Cita(citaEntity.getId(), citaEntity.getFechaGeneracion(), citaEntity.getFechaSolicitud(),
                     ProductoBuilder.convertirADominio(citaEntity.getProductoSolicitado()),
                     CuponBuilder.convertirADominio(citaEntity.getCuponUsado()),
@@ -24,8 +24,9 @@ public final class CitaBuilder {
     }
 
     public static CitaEntity convertirAEntidad(Cita cita) {
-        CitaEntity citaEntity = new CitaEntity();
+        CitaEntity citaEntity = null;
         if (cita != null) {
+            citaEntity = new CitaEntity();
             citaEntity.setId(cita.getId());
             citaEntity.setFechaSolicitud(cita.getFechaSolicitud());
             citaEntity.setCedulaCliente(cita.getCedulaCliente());

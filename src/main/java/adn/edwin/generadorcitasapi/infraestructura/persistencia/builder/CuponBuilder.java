@@ -14,7 +14,7 @@ public final class CuponBuilder {
 
     public static Cupon convertirADominio(CuponEntity cuponEntity) {
         Cupon cupon = null;
-        if (cuponEntity != null) {
+        if (cuponEntity != null && cuponEntity.getId() != null && cuponEntity.getCitaGeneradora() != null) {
             cupon = new Cupon(cuponEntity.getId(), cuponEntity.getPorcentajeDescuento(),
                     CitaBuilder.convertirADominio(cuponEntity.getCitaGeneradora()), cuponEntity.isUsado());
         }

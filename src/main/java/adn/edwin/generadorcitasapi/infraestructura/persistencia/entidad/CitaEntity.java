@@ -1,5 +1,6 @@
 package adn.edwin.generadorcitasapi.infraestructura.persistencia.entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -24,12 +25,13 @@ public class CitaEntity {
     @Column(nullable = false)
     private Date fechaSolicitud;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "id", nullable = false)
     private ProductoEntity productoSolicitado;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CUPON", referencedColumnName = "id")
+    @JsonManagedReference
     private CuponEntity cuponUsado;
 
     @Column(nullable = false)
@@ -52,7 +54,7 @@ public class CitaEntity {
     }
 
     public Date getFechaGeneracion() {
-        return (Date) fechaGeneracion.clone();
+        return (fechaGeneracion != null) ? (Date) fechaGeneracion.clone() : new Date();
     }
 
     public Date getFechaSolicitud() {

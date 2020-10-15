@@ -9,8 +9,8 @@ import org.junit.Test;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
 
 public class CitaTest {
 
@@ -24,6 +24,12 @@ public class CitaTest {
     private static final double PRECIO_PRODUCTO = PRODUCTO.getPrecio();
 
     private static final String CEDULA_VACIA = "";
+
+    private static final Long ID_TEST_SET_PRODUTO = 91L;
+    private static final String NOMBRE_TEST_SET_PRODUCTO = "SetProducto";
+
+    private static final Long ID_TEST_SET_CUPON = 23L;
+    private static final boolean USADO_TEST_SET_CUPON = true;
 
     @Test
     public void crearCitaSinCupon() {
@@ -77,6 +83,42 @@ public class CitaTest {
         } catch (CitaException citaException) {
             assertEquals(Cita.CEDULA_OBLIGATORIA, citaException.getMessage());
         }
+    }
+
+    @Test
+    public void citaSetProducto() {
+        //arange
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder()
+                .conProducto(PRODUCTO);
+        ProductoTestDataBuilder productoTestDataBuilder = new ProductoTestDataBuilder()
+                .conId(ID_TEST_SET_PRODUTO).conNombre(NOMBRE_TEST_SET_PRODUCTO);
+        //act
+        Cita cita = citaTestDataBuilder.build();
+        Producto productoNuevo = productoTestDataBuilder.build();
+        cita.setProductoSolicitado(productoNuevo);
+        //assert
+        assertNotEquals(PRODUCTO.getId(), cita.getProductoSolicitado().getId());
+        assertNotEquals(PRODUCTO.getNombre(), cita.getProductoSolicitado().getNombre());
+        assertEquals(ID_TEST_SET_PRODUTO, cita.getProductoSolicitado().getId());
+        assertEquals(NOMBRE_TEST_SET_PRODUCTO, cita.getProductoSolicitado().getNombre());
+    }
+
+    @Test
+    public void citaSetCupon() {
+        //arange
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder()
+                .conCupon(CUPON);
+        CuponTestDataBuilder cuponTestDataBuilder = new CuponTestDataBuilder()
+                .conId(ID_TEST_SET_CUPON).conInformacionUsado(USADO_TEST_SET_CUPON);
+        //act
+        Cita cita = citaTestDataBuilder.build();
+        Cupon cuponNuevo = cuponTestDataBuilder.build();
+        cita.setCuponUsado(cuponNuevo);
+        //assert
+        assertNotEquals(CUPON.getId(), cita.getCuponUsado().getId());
+        assertNotEquals(CUPON.isUsado(), cita.getCuponUsado().isUsado());
+        assertEquals(ID_TEST_SET_CUPON, cita.getCuponUsado().getId());
+        assertEquals(USADO_TEST_SET_CUPON, cita.getCuponUsado().isUsado());
     }
 
 }

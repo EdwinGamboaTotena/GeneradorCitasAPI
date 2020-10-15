@@ -1,19 +1,22 @@
 package adn.edwin.generadorcitasapi.dominio.servicio.cita;
 
 import adn.edwin.generadorcitasapi.dominio.Cita;
+import adn.edwin.generadorcitasapi.dominio.Cupon;
+import adn.edwin.generadorcitasapi.dominio.Producto;
 import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
-import adn.edwin.generadorcitasapi.dominio.servicio.cita.ServicioAgregarCita;
+import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioEditarCupon;
 import adn.edwin.generadorcitasapi.testdatabuilder.CitaTestDataBuilder;
 import adn.edwin.generadorcitasapi.testdatabuilder.CuponTestDataBuilder;
+import adn.edwin.generadorcitasapi.testdatabuilder.ProductoTestDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class ServicioAgregarCitaTest {
 
@@ -23,6 +26,15 @@ public class ServicioAgregarCitaTest {
 
     private static final String FECHA_SOLICITUD_ANTERIOR = "2020-09-09";
     private static final String FECHA_SOLICITUD_DOMINGO = "2020-10-18";
+
+    private static final Producto PRODUCTO = new ProductoTestDataBuilder().build();
+    private static final Cupon CUPON = new CuponTestDataBuilder().build();
+
+    private static final Producto PRODUCTO_NO_GENERA_CUPON =
+            new ProductoTestDataBuilder().conGeneradorCupon(false).build();
+
+    @Mock
+    private ServicioEditarCupon servicioEditarCupon;
 
     @Mock
     private RepositorioCita repositorioCita;
@@ -45,9 +57,10 @@ public class ServicioAgregarCitaTest {
         Cita cita = citaTestDataBuilder.build();
         //act
         try {
-            servicioAgregarCita.ejecutar(cita);
+            this.servicioAgregarCita.ejecutar(cita);
             fail();
         } catch (CitaException citaException) {
+            //assert
             assertEquals(ServicioAgregarCita.FEHCA_SOLICITADA_ANTERIOR_FECHA_GENERADA,
                     citaException.getMessage());
         }
@@ -79,9 +92,10 @@ public class ServicioAgregarCitaTest {
         Cita cita = citaTestDataBuilder.build();
         //act
         try {
-            servicioAgregarCita.ejecutar(cita);
+            this.servicioAgregarCita.ejecutar(cita);
             fail();
         } catch (CitaException citaException) {
+            //assert
             assertEquals(ServicioAgregarCita.NO_SE_PUEDEN_RESERVAR_LOS_DOMINGOS,
                     citaException.getMessage());
         }
@@ -98,12 +112,60 @@ public class ServicioAgregarCitaTest {
         Cita cita = citaTestDataBuilder.build();
         //act
         try {
-            servicioAgregarCita.ejecutar(cita);
+            this.servicioAgregarCita.ejecutar(cita);
             fail();
         } catch (CitaException citaException) {
-            assertEquals(ServicioAgregarCita.EL_CUPON_YA_ESTA_USADO,
+            //assert
+            assertEquals(ServicioAgregarCita.CUPON_NO_VALIDO,
                     citaException.getMessage());
         }
+    }
+
+    @Test
+    public void agregarCita() {
+        //arange
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder()
+                .conId(null).conCupon(null).conProducto(PRODUCTO_NO_GENERA_CUPON)
+                .conFechaGeneracion(FECHA_GENERACION)
+                .conFechaSolicitud(FECHA_SOLICITUD_TEST);
+        //act
+        Cita citaNueva = citaTestDataBuilder.build();
+        when(repositorioCita.agregar(citaNueva))
+                .thenReturn(new CitaTestDataBuilder()
+                        .conId(ID_TEST).conCupon(null).conProducto(PRODUCTO_NO_GENERA_CUPON)
+                        .conFechaGeneracion(FECHA_GENERACION)
+                        .conFechaSolicitud(FECHA_SOLICITUD_TEST).build());
+        Cita citaPersistida = this.servicioAgregarCita.ejecutar(citaNueva);
+        //assert
+        assertNotNull(citaPersistida.getId());
+        assertEquals(citaNueva.getCedulaCliente(), citaPersistida.getCedulaCliente());
+        assertEquals(citaNueva.getFechaSolicitud(), citaPersistida.getFechaSolicitud());
+        assertEquals(citaNueva.getPrecioProducto(), citaPersistida.getPrecioProducto(), 0);
+    }
+
+    @Test
+    public void agregarCitaConCupon() {
+        //arange
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder()
+                .conId(null).conCupon(CUPON).conProducto(PRODUCTO)
+                .conFechaGeneracion(FECHA_GENERACION)
+                .conFechaSolicitud(FECHA_SOLICITUD_TEST);
+        //act
+        Cita citaNueva = citaTestDataBuilder.build();
+        Cupon cuponEditado = new CuponTestDataBuilder().conId(CUPON.getId()).conInformacionUsado(true).build();
+        when(servicioEditarCupon.ejecutar(citaNueva.getCuponUsado())).thenReturn(cuponEditado);
+        when(repositorioCita.agregar(citaNueva))
+                .thenReturn(new CitaTestDataBuilder()
+                        .conId(ID_TEST).conCupon(cuponEditado).conProducto(PRODUCTO)
+                        .conFechaGeneracion(FECHA_GENERACION)
+                        .conFechaSolicitud(FECHA_SOLICITUD_TEST).build());
+        Cita citaPersistida = this.servicioAgregarCita.ejecutar(citaNueva);
+        //assert
+        assertNotNull(citaPersistida.getId());
+        assertEquals(citaNueva.getCedulaCliente(), citaPersistida.getCedulaCliente());
+        assertEquals(citaNueva.getFechaSolicitud(), citaPersistida.getFechaSolicitud());
+        assertEquals(citaNueva.getPrecioProducto(), citaPersistida.getPrecioProducto(), 0);
+        assertTrue(citaPersistida.getCuponUsado().isUsado());
     }
 
 }

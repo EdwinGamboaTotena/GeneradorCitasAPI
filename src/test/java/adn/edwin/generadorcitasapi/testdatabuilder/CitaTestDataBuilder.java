@@ -97,7 +97,7 @@ public class CitaTestDataBuilder {
     }
 
     public ComandoCita buildComando() {
-        return new ComandoCita(id, fechaGeneracion, fehcaSolicitud, comandoProducto, cuponUsado,
+        return new ComandoCita(id, fechaGeneracion.toString(), fehcaSolicitud.toString(), comandoProducto, cuponUsado,
                 cedulaCliente);
     }
 
