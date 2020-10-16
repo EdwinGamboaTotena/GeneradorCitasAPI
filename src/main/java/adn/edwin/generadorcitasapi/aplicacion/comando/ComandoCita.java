@@ -1,6 +1,7 @@
 package adn.edwin.generadorcitasapi.aplicacion.comando;
 
 import adn.edwin.generadorcitasapi.dominio.Cupon;
+import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.text.ParseException;
@@ -29,7 +30,7 @@ public class ComandoCita {
             this.fechaGeneracion = new SimpleDateFormat(DATE_FORMAT).parse(fechaGeneracion);
             this.fechaSolicitud = new SimpleDateFormat(DATE_FORMAT).parse(fechaSolicitud);
         } catch (ParseException parseException) {
-            throw new RuntimeException(ERROR_PARSEANDO_FECHAS);
+            throw new CitaException(ERROR_PARSEANDO_FECHAS);
         }
         this.productoSolicitado = productoSolicitado;
         this.cuponUsado = cuponUsado;

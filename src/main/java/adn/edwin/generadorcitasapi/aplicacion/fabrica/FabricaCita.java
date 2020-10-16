@@ -5,8 +5,6 @@ import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.Producto;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 @Component
 public class FabricaCita {
 
@@ -18,9 +16,7 @@ public class FabricaCita {
 
     public Cita crearCita(ComandoCita comandoCita) {
         Producto producto = fabricaProducto.crearProducto(comandoCita.getProductoSolicitado());
-        Date fechaGeneracion = (comandoCita.getFechaGeneracion() != null) ?
-                comandoCita.getFechaGeneracion() : new Date();
-        return new Cita(comandoCita.getId(), fechaGeneracion, comandoCita.getFechaSolicitud(),
+        return new Cita(comandoCita.getId(), comandoCita.getFechaGeneracion(), comandoCita.getFechaSolicitud(),
                 producto, comandoCita.getCuponUsado(), comandoCita.getCedulaCliente(), producto.getPrecio());
     }
 }
