@@ -6,6 +6,7 @@ import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.Cupon;
 import adn.edwin.generadorcitasapi.dominio.Producto;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -97,7 +98,8 @@ public class CitaTestDataBuilder {
     }
 
     public ComandoCita buildComando() {
-        return new ComandoCita(id, fechaGeneracion.toString(), fehcaSolicitud.toString(), comandoProducto, cuponUsado,
+        DateFormat dateFormat = new SimpleDateFormat(FORMATO_FECHA);
+        return new ComandoCita(id, dateFormat.format(fechaGeneracion), dateFormat.format(fehcaSolicitud), comandoProducto, cuponUsado,
                 cedulaCliente);
     }
 

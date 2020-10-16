@@ -16,8 +16,7 @@ public final class CitaBuilder {
         Cita cita = null;
         if (citaEntity != null && citaEntity.getId() != null) {
             cita = new Cita(citaEntity.getId(), citaEntity.getFechaGeneracion(), citaEntity.getFechaSolicitud(),
-                    ProductoBuilder.convertirADominio(citaEntity.getProductoSolicitado()),
-                    CuponBuilder.convertirADominio(citaEntity.getCuponUsado()),
+                    ProductoBuilder.convertirADominio(citaEntity.getProductoSolicitado()), null,
                     citaEntity.getCedulaCliente(), citaEntity.getPrecioProducto());
         }
         return cita;
@@ -32,7 +31,6 @@ public final class CitaBuilder {
             citaEntity.setCedulaCliente(cita.getCedulaCliente());
             citaEntity.setPrecioProducto(cita.getPrecioProducto());
             citaEntity.setProductoSolicitado(ProductoBuilder.convertirAEntity(cita.getProductoSolicitado()));
-            citaEntity.setCuponUsado(CuponBuilder.convertirEntity(cita.getCuponUsado()));
         }
         return citaEntity;
     }

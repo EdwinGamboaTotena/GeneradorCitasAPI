@@ -26,8 +26,8 @@ public class ControladorCita {
     }
 
     @PostMapping
-    public void agregar(@RequestBody ComandoCita comandoCita) {
-        this.manejadorAgregarCita.ejecutar(comandoCita);
+    public Cita agregar(@RequestBody ComandoCita comandoCita) {
+        return this.manejadorAgregarCita.ejecutar(comandoCita);
     }
 
     @GetMapping("/{id}")

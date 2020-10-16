@@ -4,6 +4,7 @@ import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.Cupon;
 import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
+import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioAgregarCupon;
 import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioEditarCupon;
 
 import java.util.Calendar;
@@ -21,24 +22,30 @@ public class ServicioAgregarCita {
 
     private final RepositorioCita repositorioCita;
     private final ServicioEditarCupon servicioEditarCupon;
+    private final ServicioAgregarCupon servicioAgregarCupon;
 
-    public ServicioAgregarCita(RepositorioCita repositorioCita, ServicioEditarCupon servicioEditarCupon) {
+    public ServicioAgregarCita(RepositorioCita repositorioCita, ServicioEditarCupon servicioEditarCupon,
+                               ServicioAgregarCupon servicioAgregarCupon) {
         this.repositorioCita = repositorioCita;
         this.servicioEditarCupon = servicioEditarCupon;
+        this.servicioAgregarCupon = servicioAgregarCupon;
     }
 
     public Cita ejecutar(Cita cita) {
         validarID(cita.getId());
         validarDiaHabil(cita.getFechaSolicitud());
         validarFechaSolicitud(cita.getFechaSolicitud(), cita.getFechaGeneracion());
-
+        Cita citaPersistida = this.repositorioCita.agregar(cita);
         if (cita.getCuponUsado() != null) {
             validarCupon(cita.getCuponUsado());
             cita.getCuponUsado().setUsado(true);
-            this.servicioEditarCupon.ejecutar(cita.getCuponUsado());
+            this.servicioEditarCupon.ejecutar(cita.getCuponUsado(), citaPersistida);
+        } else if (cita.getProductoSolicitado().isGeneraCupo()) {
+            this.servicioAgregarCupon.ejecutar(new Cupon(null,
+                    cita.getProductoSolicitado().getPorcetajeCuponGenerar(), citaPersistida, false));
         }
 
-        return this.repositorioCita.agregar(cita);
+        return citaPersistida;
     }
 
     private void validarID(Long id) {

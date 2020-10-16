@@ -23,13 +23,10 @@ public class ControladorCuponTest {
     @Autowired
     private MockMvc mvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Test
     public void getCuponPorId() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                .get("/cupon/{id}", "10")
+                .get("/cupon/id/{id}", "10")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -37,5 +34,17 @@ public class ControladorCuponTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.porcentajeDescuento").value(10))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.usado").value(true))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.citaGeneradora.id").value(10));
+    }
+
+    @Test
+    public void getCuponPorCitaGeneradora() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                .get("/cupon/id_cita_generadora/{id}", "1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.porcentajeDescuento").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.citaGeneradora.id").value(1));
     }
 }

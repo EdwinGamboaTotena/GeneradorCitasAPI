@@ -1,5 +1,9 @@
 package adn.edwin.generadorcitasapi.infraestructura.controlador;
 
+import adn.edwin.generadorcitasapi.aplicacion.comando.ComandoCita;
+import adn.edwin.generadorcitasapi.testdatabuilder.CitaTestDataBuilder;
+import adn.edwin.generadorcitasapi.testdatabuilder.CuponTestDataBuilder;
+import adn.edwin.generadorcitasapi.testdatabuilder.ProductoTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 public class ControladorCitaTest {
+
     @Autowired
     private MockMvc mvc;
 
@@ -50,7 +55,6 @@ public class ControladorCitaTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].cedulaCliente").value("1234"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].precioProducto").value(20))
@@ -59,5 +63,22 @@ public class ControladorCitaTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].cuponUsado").isEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].fechaGeneracion").value("2020-10-10"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].fechaSolicitud").value("2020-10-12"));
+    }
+
+    @Test
+    public void agregarCita() throws Exception {
+        ComandoCita comandoCita = new CitaTestDataBuilder().conId(null).conCedula("123456789")
+                .conComandoProducto(new ProductoTestDataBuilder().conId(2L).buildComando())
+                .conCupon(new CuponTestDataBuilder().conId(1L).build()).buildComando();
+        mvc.perform(MockMvcRequestBuilders
+                .post("/cita")
+                .content(objectMapper.writeValueAsString(comandoCita))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(31))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.cedulaCliente").value("123456789"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.precioProducto").value(18000))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.fechaSolicitud").value("2020-11-09"));
     }
 }

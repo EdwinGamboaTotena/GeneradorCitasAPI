@@ -4,6 +4,7 @@ import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.Cupon;
 import adn.edwin.generadorcitasapi.dominio.exception.CitaException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCita;
+import adn.edwin.generadorcitasapi.dominio.servicio.cupon.ServicioObtenerCuponConsumido;
 import adn.edwin.generadorcitasapi.testdatabuilder.CitaTestDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,9 @@ public class ServicioObtenerCitaTest {
     @Mock
     private RepositorioCita repositorioCita;
 
+    @Mock
+    private ServicioObtenerCuponConsumido servicioObtenerCuponConsumido;
+
     @InjectMocks
     private ServicioObtenerCita servicioObtenerCita;
 
@@ -37,6 +41,8 @@ public class ServicioObtenerCitaTest {
         //arange
         when(repositorioCita.obtener(ID_TEST))
                 .thenReturn(new CitaTestDataBuilder().conId(ID_TEST).build());
+        when(servicioObtenerCuponConsumido.ejecutar(new CitaTestDataBuilder().conId(ID_TEST).build()))
+                .thenReturn(null);
         //act
         Cita citaBuscada = this.servicioObtenerCita.ejecutar(ID_TEST);
         //assert

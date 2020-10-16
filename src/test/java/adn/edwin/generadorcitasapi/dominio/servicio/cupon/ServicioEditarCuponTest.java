@@ -1,8 +1,10 @@
 package adn.edwin.generadorcitasapi.dominio.servicio.cupon;
 
+import adn.edwin.generadorcitasapi.dominio.Cita;
 import adn.edwin.generadorcitasapi.dominio.Cupon;
 import adn.edwin.generadorcitasapi.dominio.exception.CuponException;
 import adn.edwin.generadorcitasapi.dominio.repositorio.RepositorioCupon;
+import adn.edwin.generadorcitasapi.testdatabuilder.CitaTestDataBuilder;
 import adn.edwin.generadorcitasapi.testdatabuilder.CuponTestDataBuilder;
 
 import org.junit.Before;
@@ -17,6 +19,7 @@ import static org.mockito.Mockito.when;
 public class ServicioEditarCuponTest {
 
     private static final Long CON_ID = 5L;
+    private static final Cita CITA_CONSUMIDORA = new CitaTestDataBuilder().build();
 
     @Mock
     private RepositorioCupon repositorioCupon;
@@ -36,8 +39,8 @@ public class ServicioEditarCuponTest {
                 .conId(CON_ID);
         //act
         Cupon cupon = cuponTestDataBuilder.build();
-        when(repositorioCupon.agregar(cupon)).thenReturn(new CuponTestDataBuilder().build());
-        Cupon cuponPersistido = this.servicioEditarCupon.ejecutar(cupon);
+        when(repositorioCupon.editar(cupon, CITA_CONSUMIDORA)).thenReturn(new CuponTestDataBuilder().build());
+        Cupon cuponPersistido = this.servicioEditarCupon.ejecutar(cupon, CITA_CONSUMIDORA);
         //assert
         assertNotEquals(cupon.getId(), cuponPersistido.getId());
         assertEquals(cupon.isUsado(), cuponPersistido.isUsado());
@@ -52,7 +55,7 @@ public class ServicioEditarCuponTest {
         //act
         Cupon cupon = cuponTestDataBuilder.build();
         try {
-            this.servicioEditarCupon.ejecutar(cupon);
+            this.servicioEditarCupon.ejecutar(cupon, CITA_CONSUMIDORA);
             fail();
         } catch (CuponException cuponException) {
             //assert
