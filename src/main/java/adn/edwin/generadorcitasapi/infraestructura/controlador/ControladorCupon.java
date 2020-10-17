@@ -3,13 +3,11 @@ package adn.edwin.generadorcitasapi.infraestructura.controlador;
 import adn.edwin.generadorcitasapi.aplicacion.manejadores.cupon.ManejadorObtenerCupon;
 import adn.edwin.generadorcitasapi.aplicacion.manejadores.cupon.ManejadorObtenerCuponPorIdCita;
 import adn.edwin.generadorcitasapi.dominio.Cupon;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cupon")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class ControladorCupon {
 
     private final ManejadorObtenerCupon manejadorObtenerCupon;

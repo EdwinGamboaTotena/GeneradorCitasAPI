@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/producto")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class ControladorProducto {
 
     private final ManejadorObtenerProducto manejadorObtenerProducto;
