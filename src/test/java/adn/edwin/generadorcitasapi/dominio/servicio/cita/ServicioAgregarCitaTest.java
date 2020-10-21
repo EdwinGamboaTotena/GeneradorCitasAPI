@@ -156,11 +156,10 @@ public class ServicioAgregarCitaTest {
                 .conFechaSolicitud(FECHA_SOLICITUD_TEST);
         //act
         Cita citaNueva = citaTestDataBuilder.build();
-        Cupon cuponEditado = new CuponTestDataBuilder().conId(CUPON.getId()).conInformacionUsado(true).build();
-        when(servicioEditarCupon.ejecutar(citaNueva.getCuponUsado(), citaNueva)).thenReturn(cuponEditado);
+        when(servicioEditarCupon.ejecutar(citaNueva.getCuponUsado(), citaNueva)).thenReturn(citaNueva.getCuponUsado());
         when(repositorioCita.agregar(citaNueva))
                 .thenReturn(new CitaTestDataBuilder()
-                        .conId(ID_TEST).conCupon(cuponEditado).conProducto(PRODUCTO)
+                        .conId(ID_TEST).conCupon(citaNueva.getCuponUsado()).conProducto(PRODUCTO)
                         .conFechaGeneracion(FECHA_GENERACION)
                         .conFechaSolicitud(FECHA_SOLICITUD_TEST).build());
         Cita citaPersistida = this.servicioAgregarCita.ejecutar(citaNueva);
